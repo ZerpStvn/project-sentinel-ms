@@ -34,14 +34,14 @@ RATE=1000 docker compose up -d --build sensor-sim
 
 (see [How this was tested](#how-this-was-verified--nothing-is-lost) for what happens at very high rates)
 
-For a live public HTTPS URL instead of `localhost`, see [DEPLOY.md](DEPLOY.md) (a tested Railway runbook).
+For a live public HTTPS URL instead of `localhost`, see (https://project-sentinel-production-e14d.up.railway.app/) (a tested Railway runbook).
 
 ## Architecture
 
 ```
                                                  ┌─────────────────────┐
- ┌──────────────┐   WebSocket    ┌─────────┐     │        web           │
- │  sensor-sim   │──────────────▶│ ingest  │     │  (Django + Channels) │
+ ┌──────────────┐   WebSocket    ┌─────────┐     │        web          │
+ │  sensor-sim   │──────────────▶│ ingest  │     │ (Django + Channels) │
  │ (reference    │   (client     │ worker  │     │                      │
  │  generator)   │    connects)  └────┬────┘     │  dashboard (WS push) │
  └──────────────┘                     │ XADD     │  ack/resolve (WS)    │
