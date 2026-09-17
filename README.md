@@ -241,8 +241,7 @@ by the next reconnect/snapshot, not a lost alert.
   setup. It comfortably handles the demo/stress-test load here (after the
   WAL fix), but a second heavy writer (e.g. a second processor replica)
   would start contending for the single write lock. `settings.py` already
-  switches to Postgres when `DATABASE_URL` is set (used for the Railway
-  deploy in [DEPLOY.md](DEPLOY.md)); SQLite stays the local default to
+  switches to Postgres when `DATABASE_URL`; SQLite stays the local default to
   keep "clean checkout, one `docker compose up`" true with no extra
   service required.
 - **Single processor instance.** The consumer-group design supports
@@ -252,8 +251,7 @@ by the next reconnect/snapshot, not a lost alert.
   first (see above) to actually benefit.
 - **No auth on the dashboard by default.** `DASHBOARD_BASIC_AUTH_USER` /
   `DASHBOARD_BASIC_AUTH_PASS` env vars turn on HTTP Basic Auth
-  (`alerts/middleware.py`) if you want it for a public deployment; off by
-  default for local/demo convenience.
+  (`alerts/middleware.py`); off by default for local/demo convenience.
 - **Static files are served by Django's dev-grade `staticfiles` view**,
   not whitenoise/nginx/a CDN — fine at this scale, not what you'd ship to
   real production traffic.
@@ -274,8 +272,7 @@ by the next reconnect/snapshot, not a lost alert.
   window).
 - A mock video/telemetry tile per site next to its alerts (HLS/looping
   clip).
-- A deployed, publicly reachable instance — see [DEPLOY.md](DEPLOY.md) for
-  a tested Railway runbook (managed TLS out of the box). It requires one
+- A for a tested Railway runbook (managed TLS out of the box). It requires one
   real change from the local setup: separate services need Postgres
   instead of SQLite (already wired into `settings.py` behind
   `DATABASE_URL`, and verified against a real Postgres container).
